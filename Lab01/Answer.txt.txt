@@ -1,0 +1,6 @@
+6.1:
+-What happens if users choose “Cancel”?
+	Khi người dùng chọn "Cancel" trong JOptionPane.showConfirmDialog, biến option sẽ có giá trị là JOptionPane.CANCEL_OPTION. 
+	Trong mã hiện tại, chỉ có hai lựa chọn được xử lý là JOptionPane.YES_OPTION và !JOptionPane.YES_OPTION, vì vậy nếu người dùng chọn "Cancel", chương trình sẽ xử lý rằng đã chọn "No".
+-How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do” and “I don’t”. 
+	Để hộp thoại chỉ hiển thị 2 hút Yes và No thì cần dùng th tham số JOptionPane.YES_NO_OPTION vào cuối hàm JOptionPane.showConfirmDialog.
