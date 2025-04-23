@@ -1,0 +1,63 @@
+Lab03:
+
+-Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of arguments for dvd. Compare to an array parameter. What do you prefer in this case?
+	Sử dụng varargs tiện lợi hơn vì không cần tạo mảng trước khi truyền tham số. Điều này giúp code gọn hơn và dễ sử dụng khi số lượng đối tượng không cố định.
+
+-Is JAVA a Pass by Value or a Pass by Reference programming language? 
+	Java là Pass by Value. Với đối tượng, giá trị truyền là bản sao của tham chiếu, nên thay đổi thuộc tính sẽ ảnh hưởng, nhưng gán tham chiếu mới thì không.
+
+-After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+	Vì 2 đối tượng trong phương thức swap chỉ là bản sao của các đối tượng trong hàm main. 
+	Bởi vậy 2 đối tượng trong hàm main không đổi giá trị khi các đối tượng trong phương thức swap đổi giá trị.
+
+-After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+	Tiêu đề của JungleDVD bị thay đổi do trong phương thức changeTitle, title của dvd được thay đổi bằng hàm setTitle(), nó sẽ tác động đến đối tượng mà nó tham chiếu tới.
+
+-Trong trường hợp cần so sánh các Media với nhau bằng cách implement Comparable thay vì Comparator, thì thay vì tạo class riêng cho từng Comparator, ta cần cho class Media implement interface Comparable.
+
+-Ví dụ như sau:
+public abstract class Media implements Comparable<Media> {
+    @Override
+    public int compareTo(Media otherMedia) {
+        // Compare by title
+        return this.title.compareTo(otherMedia.getTitle());
+    }
+}
+
+-Có thể, cài đặt như sau:
+public abstract class Media implements Comparable<Media> {
+    @Override
+    public int compareTo(Media otherMedia) {
+        // Compare by title first
+        int titleComparison = this.title.compareTo(otherMedia.getTitle());
+
+        // If titles are equal, compare by cost
+        return (titleComparison == 0) ? Float.compare(this.cost, otherMedia.getCost()) : titleComparison;
+    }
+}
+-Cài đặt như sau:
+public class DVD extends Media {
+    // Override compareTo for DVDs
+    @Override
+    public int compareTo(Media otherMedia) {
+        if (otherMedia instanceof DVD) {
+            DVD otherDVD = (DVD) otherMedia;
+
+            // Compare by title first
+            int titleComparison = getTitle().compareTo(otherDVD.getTitle());
+
+            // If titles are equal, compare by decreasing length
+            if (titleComparison == 0) {
+                int lengthComparison = Integer.compare(otherDVD.getLength(), getLength());
+
+                // If lengths are equal, compare by cost
+                return (lengthComparison == 0) ? Float.compare(getCost(), otherDVD.getCost()) : lengthComparison;
+            }
+
+            return titleComparison;
+        } else {
+            // For non-DVD media, use the default comparison (title then cost)
+            return super.compareTo(otherMedia);
+        }
+    }
+}
