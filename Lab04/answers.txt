@@ -1,0 +1,28 @@
+Questions:
+Programming with AWT and Swing is quite similar (similar elements including container/components, and 
+event-handling). However, there are some differences that you need to note: 
+- Compare the top-level containers in Swing and AWT 
+- Compare the class name of components in AWT and the corresponding class’s name in Swing 
+- Compare the event-handling of Swing and AWT applications 
+The resulting appearances of the applications developed using Swing and AWT might be different as well. 
+Make comparisons.  
+
+---------------------------------------------------------------------------------------------------------------------
+
+So sánh:  
+
+1. Top-level container trong Swing và AWT  
+- AWT: Sử dụng các container "nặng" (heavyweight) như `Frame`, `Dialog`, và `Window`, dựa trên các thành phần gốc của hệ điều hành.  
+- Swing: Giới thiệu các container "nhẹ" (lightweight) với tiền tố "J" như `JFrame`, `JDialog`, và `JWindow`, được vẽ hoàn toàn bằng Java, đảm bảo tính đồng nhất đa nền tảng.  
+
+2. Tên lớp component trong AWT và Swing  
+- AWT: Tên component cơ bản không có tiền tố (ví dụ: `Button`, `Label`, `TextField`).  
+- Swing: Thêm tiền tố "J" (ví dụ: `JButton`, `JLabel`, `JTextField`) và bổ sung các component nâng cao như `JTable`, `JTree`.  
+
+3. Xử lý sự kiện trong Swing và AWT  
+- AWT: Sử dụng gói `java.awt.event`, cung cấp các bộ lắng nghe sự kiện cơ bản (ví dụ: `ActionListener` cho sự kiện nhấn nút).  
+- Swing: Kế thừa hệ thống sự kiện của AWT nhưng hỗ trợ thêm các tương tác phức tạp hơn (ví dụ: `ListSelectionEvent` cho `JList`).  
+
+Khác biệt về giao diện:  
+- AWT: Giao diện phụ thuộc vào hệ điều hành, dẫn đến sự không đồng nhất giữa các nền tảng.  
+- Swing: Hỗ trợ nhiều phong cách giao diện (Look-and-Feel - LAF) như Metal, Nimbus hoặc giao diện native, giúp UI đồng nhất hoặc tùy chỉnh linh hoạt.  
